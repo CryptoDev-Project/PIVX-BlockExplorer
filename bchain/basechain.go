@@ -59,7 +59,7 @@ func (b *BaseChain) EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc A
 	return nil, errors.New("Not supported")
 }
 
-// PIVX specific
+// PNY specific
 func (b *BaseChain) Findzcserial(serialHex string) (string, error) {
     return "", errors.New("Findserial not supported")
 }

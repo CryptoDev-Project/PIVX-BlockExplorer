@@ -15,12 +15,12 @@ isTestnet = True
 
 # RPC CREDS
 rpc_user = "rpc"
-rpc_pass = "pivxrpc"
+rpc_pass = "pnyrpc"
 rpc_host = "127.0.0.1"
 rpc_port = "18049" if isTestnet else "8049"
 rpc_url = "http://%s:%s@%s" % (rpc_user, rpc_pass, rpc_host)
 bb_url = "https://testnet" if isTestnet else "https://explorer"
-bb_url += ".pivx.link"
+bb_url += ".pny.link"
 
 # FILENAME
 supply_data_file = os.path.join("/opt/coins/blockbook/plot_data", "supply_data.json")
@@ -72,19 +72,19 @@ except FileNotFoundError:
     if isTestnet:
         supply_data["time_axis"] = [1454124731, 1488951557]
         supply_data["lastBlockHash"] = '0000041e482b9b9691d98eefb48473405c0b8ec31b76df3797c74a78680ef818'
-        supply_data["pivSupply"] = [0.0, 24810000.99975790]
+        supply_data["pnySupply"] = [0.0, 24810000.99975790]
     else:
         supply_data["time_axis"] = [1454124731, 1454186818]
         supply_data["lastBlockHash"] = '0000000a86f23294329c83d69e254a4f8d127b6b899a14b147885740c4be1713'
-        supply_data["pivSupply"] = [0.0, 84751.0]
-    zpivSupply = {}
-    zpivMints = {}
+        supply_data["pnySupply"] = [0.0, 84751.0]
+    zpnySupply = {}
+    zpnyMints = {}
     for k in ZC_DENOMS:
         denom_key = "denom_%d" % k
-        zpivSupply[denom_key] = [0, 0]
-        zpivMints[denom_key] = [0, 0]
-    supply_data["zpivSupply"] = zpivSupply
-    supply_data["zpivMints"] = zpivMints
+        zpnySupply[denom_key] = [0, 0]
+        zpnyMints[denom_key] = [0, 0]
+    supply_data["zpnySupply"] = zpnySupply
+    supply_data["zpnyMints"] = zpnyMints
 
     network_data = {}
     network_data["blocks_axis"] = [0, 100]
@@ -114,10 +114,10 @@ if (
 ):
     # remove 3 datapoints to be extra safe
     supply_data["lastBlockHash"] = last_block_hash
-    for data_key in ["zpivSupply", "zpivMints"]:
+    for data_key in ["zpnySupply", "zpnyMints"]:
         for denom_key in supply_data[data_key]:
             supply_data[data_key][denom_key] = supply_data[data_key][denom_key][:-3]
-    for data_key in ["blocks_axis", "time_axis", "pivSupply"]:
+    for data_key in ["blocks_axis", "time_axis", "pnySupply"]:
         supply_data[data_key] = supply_data[data_key][:-3]
 
     for data_key in network_data:
@@ -134,10 +134,10 @@ while supply_data["blocks_axis"][-1] + 100 <= blockCount:
     print("Getting block %d..." % new_block_num)
     block = conn.getblock(supply_data["lastBlockHash"], True)
 
-    # get PIV supply and zPIV supply
-    supply_data["pivSupply"].append(float(block["moneysupply"]))
+    # get PNY supply and zPNY supply
+    supply_data["pnySupply"].append(float(block["moneysupply"]))
     for k in ZC_DENOMS:
-        supply_data["zpivSupply"]["denom_%d" % k].append(int(block["zPIVsupply"][str(k)]))
+        supply_data["zpnySupply"]["denom_%d" % k].append(int(block["zPNYsupply"][str(k)]))
 
     # get time, blocktime, blocksize and difficulty
     supply_data["time_axis"].append(int(block["time"]))
@@ -152,7 +152,7 @@ while supply_data["blocks_axis"][-1] + 100 <= blockCount:
     # get mints
     for k in ZC_DENOMS:
         # get mints in range
-        supply_data["zpivMints"]["denom_%d" % k].append(int(block_stats["mintcount"]["denom_%d" % k]))
+        supply_data["zpnyMints"]["denom_%d" % k].append(int(block_stats["mintcount"]["denom_%d" % k]))
 
     # get tx count and fees
     network_data["txs"].append(int(block_stats["txcount_all"]))

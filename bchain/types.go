@@ -129,7 +129,7 @@ type BlockInfo struct {
 	Difficulty json.Number `json:"difficulty"`
 	Txids      []string    `json:"tx,omitempty"`
     MoneySupply   json.Number `json:"moneysupply"`
-    ZerocoinSupply  ZCdenoms    `json:"zPIVsupply"`
+    ZerocoinSupply  ZCdenoms    `json:"zPNYsupply"`
 }
 
 // MempoolEntry is used to get data about mempool entry
@@ -164,7 +164,7 @@ type ChainInfo struct {
 	Timeoffset      float64 `json:"timeoffset"`
 	Warnings        string  `json:"warnings"`
     MoneySupply   json.Number `json:"moneysupply"`
-    ZerocoinSupply  ZCdenoms    `json:"zPIVsupply"`
+    ZerocoinSupply  ZCdenoms    `json:"zPNYsupply"`
     MasternodeCount int `json:"masternodecount"`
     NextSuperBlock int `json:"masternodecount"`
 }
@@ -262,7 +262,7 @@ type BlockChain interface {
 	EthereumTypeEstimateGas(params map[string]interface{}) (uint64, error)
 	EthereumTypeGetErc20ContractInfo(contractDesc AddressDescriptor) (*Erc20Contract, error)
 	EthereumTypeGetErc20ContractBalance(addrDesc, contractDesc AddressDescriptor) (*big.Int, error)
-    // PIVX specific
+    // PNY specific
     Findzcserial(serialHex string) (string, error)
 }
 
