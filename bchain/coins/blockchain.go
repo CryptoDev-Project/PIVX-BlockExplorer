@@ -22,6 +22,7 @@ import (
 	"blockbook/bchain/coins/myriad"
 	"blockbook/bchain/coins/namecoin"
 	"blockbook/bchain/coins/nuls"
+	"blockbook/bchain/coins/pny"
 	"blockbook/bchain/coins/pivx"
 	"blockbook/bchain/coins/polis"
 	"blockbook/bchain/coins/qtum"
@@ -80,6 +81,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["PIVX"] = pivx.NewPivXRPC
 	BlockChainFactories["PIVX Testnet"] = pivx.NewPivXRPC
+	BlockChainFactories["PNY"] = pny.NewPnYRPC
 	BlockChainFactories["Polis"] = polis.NewPolisRPC
 	BlockChainFactories["Zcoin"] = xzc.NewZcoinRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
