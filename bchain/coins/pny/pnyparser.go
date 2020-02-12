@@ -26,8 +26,8 @@ import (
 
 const (
 	// Net Magics
-	MainnetMagic wire.BitcoinNet = 0xe9fdc490
-	TestnetMagic wire.BitcoinNet = 0xba657645
+	MainnetMagic wire.BitcoinNet = 0xf92dac4b
+	TestnetMagic wire.BitcoinNet = 0xba657745
 
 	// Zerocoin op codes
 	OP_ZEROCOINMINT  = 0xc1
@@ -46,7 +46,7 @@ const (
 
 	// Staking Addresses
 	STAKING_ADDR_MAIN = 63
-	STAKING_ADDR_TEST = 73
+	STAKING_ADDR_TEST = 63
 
 )
 
@@ -59,16 +59,16 @@ func init() {
 	// PNY mainnet Address encoding magics
 	MainNetParams = chaincfg.MainNetParams
 	MainNetParams.Net = MainnetMagic
-	MainNetParams.PubKeyHashAddrID = []byte{30} // starting with 'D'
-	MainNetParams.ScriptHashAddrID = []byte{13}
-	MainNetParams.PrivateKeyID = []byte{212}
+	MainNetParams.PubKeyHashAddrID = []byte{55} // starting with 'P'
+	MainNetParams.ScriptHashAddrID = []byte{117}
+	MainNetParams.PrivateKeyID = []byte{118}
 
 	// PNY testnet Address encoding magics
 	TestNetParams = chaincfg.TestNet3Params
 	TestNetParams.Net = TestnetMagic
-	TestNetParams.PubKeyHashAddrID = []byte{139} // starting with 'x' or 'y'
-	TestNetParams.ScriptHashAddrID = []byte{19}
-	TestNetParams.PrivateKeyID = []byte{239}
+	TestNetParams.PubKeyHashAddrID = []byte{46} // starting with 'x' or 'y'
+	TestNetParams.ScriptHashAddrID = []byte{41}
+	TestNetParams.PrivateKeyID = []byte{174}
 }
 
 // PnYParser handle
